@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+h1{
+  color: #FAB95B;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color:#F5F0CD;
+  text-align: center;
+  padding: 1.25rem;
+}
+
+/* ===== GRID ===== */
+.gameGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 7.5rem); /* 4 columns */
+  gap: 1rem;
+  justify-content: center;
+  margin-top:1.875rem;
+}
+
+/* ===== CARD ===== */
+.card {
+  width: 7.5rem;
+  height: 10rem;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.cardInner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.cardFlipped .cardInner {
+  transform: rotateY(180deg);
+}
+
+/* Front and Back */
+.cardFront,
+.cardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  overflow: hidden;
+}
+
+/* Front: just blue background */
+.cardFront {
+  background-color: #81BFDA;
+}
+
+/* Back: image */
+.cardBack {
+  transform: rotateY(180deg);
+}
+
+.cardBack img {
+  width: 100%;
+  height: 100%;
+}
