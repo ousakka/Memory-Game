@@ -1,13 +1,5 @@
-const cards = document.querySelectorAll(".card");
-
-cards.forEach((card) => {
-  card.addEventListener("click", () => {
-    card.classList.toggle("cardFlipped");
-  });
-});
-
 // 1. Select all cards from the page
-cards = document.querySelectorAll(".card");
+const cards = document.querySelectorAll(".card");
 
 // 2. Track game state
 let flippedCards = []; // Cards currently flipped (max 2)
@@ -44,21 +36,24 @@ function flipCard() {
   startTimer(); // Start timer on first flip
 
   // Ignore click if card is already flipped or 2 cards are flipped
-  if (this.classList.contains("cardFlipped") || flippedCards.length === 2)
+  if (this.classList.contains("cardFlipped") || flippedCards.length === 2) {
     return;
-
+  }
   // Flip the card visually
   this.classList.add("cardFlipped");
 
-  // Increment reveal counter
-  reveals++;
-  movesDisplay.textContent = reveals;
-
+  /* // Increment reveal counter
+                                   reveals++;
+                                   movesDisplay.textContent = reveals;
+                                   */
   // Add card to flipped array
   flippedCards.push(this);
 
   // If two cards are flipped, check match
   if (flippedCards.length === 2) {
+    // Increment reveal counter
+    reveals++;
+    movesDisplay.textContent = reveals;
     checkMatch();
   }
 }
