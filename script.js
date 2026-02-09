@@ -60,23 +60,22 @@ function flipCard() {
 
 // 7. Check if two flipped cards match
 function checkMatch() {
-  const firstImage = flippedCards[0].querySelector(".cardBack img").src;
-  const secondImage = flippedCards[1].querySelector(".cardBack img").src;
+  const firstCard = flippedCards[0].dataset.name;
+  const secondCard = flippedCards[1].dataset.name;
 
-  if (firstImage === secondImage) {
-    // Match found
-    flippedCards = [];
-    matches++;
-
-    // Check if all pairs are matched
-    if (matches === cards.length / 2) {
-      setTimeout(() => showWinMessage(), 500);
-    }
-  } else {
-    // Not a match → flip back after 1 second
+  if (firstCard === secondCard) {
     setTimeout(() => {
-      flippedCards[0].classList.remove("cardFlipped");
-      flippedCards[1].classList.remove("cardFlipped");
+      flippedCards.forEach((card) => card.classList.add("matched"));
+      flippedCards = [];
+      matches++;
+
+      if (matches === cards.length / 2) {
+        showWinMessage();
+      }
+    }, 500);
+  } else {
+    setTimeout(() => {
+      flippedCards.forEach((card) => card.classList.remove("cardFlipped"));
       flippedCards = [];
     }, 1000);
   }
@@ -101,7 +100,7 @@ restartBtn.addEventListener("click", () => {
   timerInterval = null;
 
   // Flip all cards back
-  cards.forEach((card) => card.classList.remove("cardFlipped"));
+  cards.forEach((card) => card.classList.remove("cardFlipped", "matched"));
 
   // Shuffle cards again
   cards.forEach((card) => {

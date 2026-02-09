@@ -11,118 +11,158 @@
       <p>⏱ Time: <span id="timer">0</span>s</p>
       <p>🔢 Moves: <span id="moves">0</span></p>
     </div>
-    <div id="winMessage" style="display: none; margin-top: 20px">
+    <div
+      id="winMessage"
+      class="win-message"
+      style="display: none; margin-top: 20px"
+    >
       <h2>🎉 You Won! 🎉</h2>
-      <button id="restartBtn">Restart</button>
+      <button id="restartBtn" class="restart-btn">Restart</button>
     </div>
     <div class="gameGrid">
       <!-- Row 1 -->
-      <div class="card">
+      <div class="card" data-name="cat">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/cat.jpg" alt="cat" />
+            <img
+              src="https://i.pinimg.com/1200x/a3/a3/66/a3a366141d6c46d96e6e6ce4f2de554a.jpg"
+              alt="cat"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="dog">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/dog.jpg" alt="dog" />
+            <img
+              src="https://i.pinimg.com/736x/5d/88/30/5d8830d2e2e41a3fd32f6cdc30e89eac.jpg"
+              alt="dog"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="fox">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/fox.jpg" alt="fox" />
+            <img
+              src="https://i.pinimg.com/736x/69/ac/18/69ac18521ec447a1fa4bfdd472e9abc6.jpg"
+              alt="fox"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="lion">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/lion.jpg" alt="lion" />
+            <img
+              src="https://i.pinimg.com/736x/ee/12/02/ee12029e27482d25754ee0563d46a817.jpg"
+              alt="lion"
+            />
           </div>
         </div>
       </div>
 
       <!-- Row 2 -->
-      <div class="card">
+      <div class="card" data-name="owl">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/owl.jpg" alt="owl" />
+            <img
+              src="https://i.pinimg.com/1200x/d3/3d/d8/d33dd89d73d5ab266782852085f67523.jpg"
+              alt="owl"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="bear">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/bear.jpg" alt="bear" />
+            <img
+              src="https://i.pinimg.com/1200x/d5/f6/9c/d5f69cd55611856d07e17bf06bce5c68.jpg"
+              alt="bear"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="cat">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/cat.jpg" alt="cat" />
+            <img
+              src="https://i.pinimg.com/1200x/a3/a3/66/a3a366141d6c46d96e6e6ce4f2de554a.jpg"
+              alt="cat"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="dog">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/dog.jpg" alt="dog" />
+            <img
+              src="https://i.pinimg.com/736x/5d/88/30/5d8830d2e2e41a3fd32f6cdc30e89eac.jpg"
+              alt="dog"
+            />
           </div>
         </div>
       </div>
 
       <!-- Row 3 -->
-      <div class="card">
+      <div class="card" data-name="fox">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/fox.jpg" alt="fox" />
+            <img
+              src="https://i.pinimg.com/736x/69/ac/18/69ac18521ec447a1fa4bfdd472e9abc6.jpg"
+              alt="fox"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="lion">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/lion.jpg" alt="lion" />
+            <img
+              src="https://i.pinimg.com/736x/ee/12/02/ee12029e27482d25754ee0563d46a817.jpg"
+              alt="lion"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="owl">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/owl.jpg" alt="owl" />
+            <img
+              src="https://i.pinimg.com/1200x/d3/3d/d8/d33dd89d73d5ab266782852085f67523.jpg"
+              alt="owl"
+            />
           </div>
         </div>
       </div>
 
-      <div class="card">
+      <div class="card" data-name="bear">
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
-            <img src="assets/images/bear.jpg" alt="bear" />
+            <img
+              src="https://i.pinimg.com/1200x/d5/f6/9c/d5f69cd55611856d07e17bf06bce5c68.jpg"
+              alt="bear"
+            />
           </div>
         </div>
       </div>
