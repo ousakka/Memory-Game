@@ -20,7 +20,6 @@ body {
   margin-top: 1rem;
 }
 
-/* ===== GRID ===== */
 .gameGrid {
   display: grid;
   grid-template-columns: repeat(4, 7.5rem); /* 4 columns */
@@ -29,7 +28,6 @@ body {
   margin-top: 1.875rem;
 }
 
-/* ===== CARD ===== */
 .card {
   width: 7.5rem;
   height: 10rem;
@@ -49,7 +47,6 @@ body {
   transform: rotateY(180deg);
 }
 
-/* Front and Back */
 .cardFront,
 .cardBack {
   position: absolute;
@@ -60,9 +57,14 @@ body {
   overflow: hidden;
 }
 
-/* Front: just blue background */
 .cardFront {
   background-color: #81bfda;
+}
+
+.card.matched {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
 }
 
 /* Back: image */
@@ -74,11 +76,11 @@ body {
   width: 100%;
   height: 100%;
 }
-#winMessage {
+.winMessage {
   text-align: center;
 }
 
-#restartBtn {
+.restartBtn {
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   font-size: 1rem;
