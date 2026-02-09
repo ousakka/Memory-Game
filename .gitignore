@@ -1,2 +1,11 @@
-.DS_Store
+# Ignore node modules
 node_modules/
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore JSON and lock files you don’t want on GitHub
+*.json
+
+# Ignore server folder and files
+server/
