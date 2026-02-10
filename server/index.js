@@ -1,9 +1,11 @@
 import express from "express";
 import knex from "knex";
 import path from "path";
+import cors from "cors";
 import { fileURLToPath } from "url";
 
 const app = express();
+app.use(cors());
 const port = 3000;
 
 app.use(express.json());
