@@ -1,20 +1,19 @@
-// 1. Select all cards from the page
-const cards = document.querySelectorAll(".card");
+// 1. DOM elements
+const gameGrid = document.getElementById("gameGrid"); // use this container
+const movesDisplay = document.getElementById("moves");
+const timerDisplay = document.getElementById("timer");
+const winMessage = document.getElementById("winMessage");
+const restartBtn = document.getElementById("restartBtn");
 
-// 2. Track game state
-let flippedCards = []; // Cards currently flipped (max 2)
-let reveals = 0; // How many cards have been revealed
-let matches = 0; // Number of matched pairs
-let timer = 0; // Seconds elapsed
+// 2. Game state
+let flippedCards = [];
+let reveals = 0;
+let matches = 0;
+let timer = 0;
 let timerInterval = null;
 
-// 3. DOM elements
-const movesDisplay = document.getElementById("moves"); // Reveal counter
-const timerDisplay = document.getElementById("timer"); // Timer display
-const winMessage = document.getElementById("winMessage"); // Win message div
-const restartBtn = document.getElementById("restartBtn"); // Restart button
+// Timer
 
-// 4. Start timer on first reveal
 function startTimer() {
   if (!timerInterval) {
     timerInterval = setInterval(() => {
@@ -24,41 +23,33 @@ function startTimer() {
   }
 }
 
-// 5. Shuffle cards
-(function shuffleCards() {
+// Shuffle cards
+
+function shuffleCards() {
+  const cards = document.querySelectorAll(".card"); // dynamic cards
   cards.forEach((card) => {
     card.style.order = Math.floor(Math.random() * 100);
   });
-})();
+}
 
-// 6. Function to flip a card
+// Flip a card
+
 function flipCard() {
-  startTimer(); // Start timer on first flip
-
-  // Ignore click if card is already flipped or 2 cards are flipped
-  if (this.classList.contains("cardFlipped") || flippedCards.length === 2) {
+  startTimer();
+  if (this.classList.contains("cardFlipped") || flippedCards.length === 2)
     return;
-  }
-  // Flip the card visually
   this.classList.add("cardFlipped");
-
-  /* // Increment reveal counter
-                                   reveals++;
-                                   movesDisplay.textContent = reveals;
-                                   */
-  // Add card to flipped array
   flippedCards.push(this);
 
-  // If two cards are flipped, check match
   if (flippedCards.length === 2) {
-    // Increment reveal counter
     reveals++;
     movesDisplay.textContent = reveals;
     checkMatch();
   }
 }
 
-// 7. Check if two flipped cards match
+// Check match
+
 function checkMatch() {
   const firstCard = flippedCards[0].dataset.name;
   const secondCard = flippedCards[1].dataset.name;
@@ -68,8 +59,7 @@ function checkMatch() {
       flippedCards.forEach((card) => card.classList.add("matched"));
       flippedCards = [];
       matches++;
-
-      if (matches === cards.length / 2) {
+      if (matches === document.querySelectorAll(".card").length / 2) {
         showWinMessage();
       }
     }, 500);
@@ -81,15 +71,16 @@ function checkMatch() {
   }
 }
 
-// 8. Show win message
+// Show win message
+
 function showWinMessage() {
-  clearInterval(timerInterval); // Stop timer
+  clearInterval(timerInterval);
   winMessage.style.display = "block";
 }
 
-// 9. Restart game
+// Restart game
+
 restartBtn.addEventListener("click", () => {
-  // Reset game state
   flippedCards = [];
   reveals = 0;
   matches = 0;
@@ -99,16 +90,49 @@ restartBtn.addEventListener("click", () => {
   clearInterval(timerInterval);
   timerInterval = null;
 
-  // Flip all cards back
-  cards.forEach((card) => card.classList.remove("cardFlipped", "matched"));
+  gameGrid.innerHTML = ""; // Clear old cards
+  fetchCards(); // Fetch fresh cards
 
-  // Shuffle cards again
-  cards.forEach((card) => {
-    card.style.order = Math.floor(Math.random() * 100);
-  });
-
-  winMessage.style.display = "none"; // Hide win message
+  winMessage.style.display = "none";
 });
 
-// 10. Add click event to each card
-cards.forEach((card) => card.addEventListener("click", flipCard));
+// Fetch cards dynamically
+
+async function fetchCards() {
+  try {
+    const res = await fetch("http://localhost:3000/cards"); // backend API
+    const cardsData = await res.json();
+
+    gameGrid.innerHTML = ""; // Clear container
+
+    cardsData.forEach((card) => {
+      const cardDiv = document.createElement("div");
+      cardDiv.classList.add("card");
+      cardDiv.dataset.name = card.name;
+
+      cardDiv.innerHTML = `
+        <div class="cardInner">
+          <div class="cardFront"></div>
+          <div class="cardBack">
+            <img src="${card.image_url}" alt="${card.name}" />
+          </div>
+        </div>
+      `;
+
+      gameGrid.appendChild(cardDiv);
+    });
+
+    // Add click event listeners to new cards
+    const cards = document.querySelectorAll(".card");
+    cards.forEach((card) => card.addEventListener("click", flipCard));
+
+    shuffleCards();
+  } catch (err) {
+    console.error("Error fetching cards:", err);
+    gameGrid.innerHTML = "<p>Failed to load cards. Check backend server.</p>";
+  }
+}
+
+// Initialize game
+
+fetchCards();
