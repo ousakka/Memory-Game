@@ -22,7 +22,7 @@ body {
 
 .gameGrid {
   display: grid;
-  grid-template-columns: repeat(4, 7.5rem); /* 4 columns */
+  grid-template-columns: repeat(4, 7.5rem); 
   gap: 1rem;
   justify-content: center;
   margin-top: 1.875rem;
@@ -67,7 +67,7 @@ body {
   transition: opacity 0.5s;
 }
 
-/* Back: image */
+
 .cardBack {
   transform: rotateY(180deg);
 }

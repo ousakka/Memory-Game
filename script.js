@@ -99,7 +99,7 @@ function checkMatch() {
   }
 }
 
-// PREVIEW MODE (1,5 seconds)
+// PREVIEW MODE (1 seconds)
 
 function previewCards() {
   const cards = document.querySelectorAll(".card");
@@ -112,7 +112,7 @@ function previewCards() {
   setTimeout(() => {
     cards.forEach((card) => card.classList.remove("cardFlipped"));
     canClick = true;
-  }, 1500);
+  }, 1000);
 }
 
 // WIN MESSAGE
