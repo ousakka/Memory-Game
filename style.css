@@ -3,12 +3,16 @@
 }
 
 h1 {
-  color: #fab95b;
+  color: #bc7717;
 }
 
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f0cd;
+  background-image: url("https://i.pinimg.com/736x/12/66/5f/12665f6251688694959b349a1a669363.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   text-align: center;
   padding: 1.25rem;
 }
@@ -22,7 +26,7 @@ body {
 
 .gameGrid {
   display: grid;
-  grid-template-columns: repeat(4, 7.5rem); 
+  grid-template-columns: repeat(4, 7.5rem);
   gap: 1rem;
   justify-content: center;
   margin-top: 1.875rem;
@@ -66,7 +70,6 @@ body {
   pointer-events: none;
   transition: opacity 0.5s;
 }
-
 
 .cardBack {
   transform: rotateY(180deg);
