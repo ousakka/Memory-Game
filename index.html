@@ -8,21 +8,26 @@
   <body>
     <h1>😎Test Your Memory😎</h1>
 
-    <div class="stats">
-      <p>⏱ Time: <span id="timer">0</span>s</p>
-      <p>🔢 Moves: <span id="moves">0</span></p>
+    <div class="game-stats">
+      <div class="stat-box">⏱ Time: <span id="timer">0</span>s</div>
+      <div class="stat-box">🎯 Moves: <span id="moves">0</span></div>
+      <div class="stat-box">
+        ⭐ Your Score: <span id="scoreDisplay">0</span>
+      </div>
+      <div class="stat-box">
+        🥇 Best Score: <span id="bestScoreDisplay">0</span>
+      </div>
     </div>
-
     <div
       id="winMessage"
       class="win-message"
       style="display: none; margin-top: 20px"
     >
       <h2>🎉 You Won! 🎉</h2>
+      <p id="rating"></p>
       <button id="restartBtn" class="restartBtn">Restart</button>
     </div>
 
-   
     <div class="gameGrid" id="gameGrid"></div>
 
     <script src="script.js"></script>

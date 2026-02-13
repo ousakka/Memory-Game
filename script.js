@@ -4,7 +4,10 @@ const gameGrid = document.getElementById("gameGrid");
 const movesDisplay = document.getElementById("moves");
 const timerDisplay = document.getElementById("timer");
 const winMessage = document.getElementById("winMessage");
+const ratingDisplay = document.getElementById("rating");
 const restartBtn = document.getElementById("restartBtn");
+const scoreDisplay = document.getElementById("scoreDisplay");
+const bestScoreDisplay = document.getElementById("bestScoreDisplay");
 
 // SOUND EFFECTS
 
@@ -21,6 +24,9 @@ let matches = 0;
 let timer = 0;
 let timerInterval = null;
 let canClick = false;
+let score = 0;
+let bestScore = localStorage.getItem("bestScore") || 0;
+bestScoreDisplay.textContent = bestScore;
 
 // TIMER
 
@@ -31,6 +37,12 @@ function startTimer() {
       timerDisplay.textContent = timer;
     }, 1000);
   }
+}
+function getRating() {
+  if (reveals <= 10) return "⭐⭐⭐⭐⭐Excellent!";
+  if (reveals <= 15) return "⭐⭐⭐Good!";
+  if (reveals <= 20) return "⭐⭐Fair!";
+  return "⭐ Keep practicing!";
 }
 
 // SHUFFLE
@@ -77,6 +89,8 @@ function checkMatch() {
     // Play match sound
     matchSound.currentTime = 0;
     matchSound.play().catch(() => {});
+    score += 10; // +10 points per match
+    document.getElementById("scoreDisplay").textContent = score;
 
     setTimeout(() => {
       flippedCards.forEach((card) => card.classList.add("matched"));
@@ -91,7 +105,9 @@ function checkMatch() {
     // Play not match sound
     notMatchSound.currentTime = 0;
     notMatchSound.play().catch(() => {});
-
+    score -= 2; // -2 points for a mismatch
+    if (score < 0) score = 0; // prevent negative score
+    document.getElementById("scoreDisplay").textContent = score;
     setTimeout(() => {
       flippedCards.forEach((card) => card.classList.remove("cardFlipped"));
       flippedCards = [];
@@ -119,11 +135,13 @@ function previewCards() {
 
 function showWinMessage() {
   clearInterval(timerInterval);
-
-  winSound.currentTime = 0;
-  winSound.play().catch(() => {});
-
+  if (score > bestScore) {
+    bestScore = score;
+    localStorage.setItem("bestScore", bestScore); // save to browser storage
+    document.getElementById("bestScoreDisplay").textContent = bestScore;
+  }
   winMessage.style.display = "block";
+  document.getElementById("rating").textContent = getRating();
 }
 
 // RESTART GAME
@@ -133,13 +151,15 @@ restartBtn.addEventListener("click", () => {
   reveals = 0;
   matches = 0;
   timer = 0;
-
+  score = 0;
   timerDisplay.textContent = timer;
   movesDisplay.textContent = reveals;
-
+  bestScore = localStorage.getItem("bestScore") || 0;
+  document.getElementById("bestScoreDisplay").textContent = bestScore;
   clearInterval(timerInterval);
   timerInterval = null;
 
+  document.getElementById("scoreDisplay").textContent = score;
   gameGrid.innerHTML = "";
   winMessage.style.display = "none";
 
@@ -147,7 +167,6 @@ restartBtn.addEventListener("click", () => {
 });
 
 // FETCH CARDS
-
 async function fetchCards() {
   try {
     const res = await fetch("http://localhost:3000/cards");
@@ -160,14 +179,14 @@ async function fetchCards() {
       cardDiv.classList.add("card");
       cardDiv.dataset.name = card.name;
 
-      cardDiv.innerHTML = `
+      cardDiv.innerHTML = `(
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
             <img src="${card.image_url}" alt="${card.name}" />
           </div>
         </div>
-      `;
+      )`;
 
       gameGrid.appendChild(cardDiv);
     });
@@ -176,7 +195,7 @@ async function fetchCards() {
     cards.forEach((card) => card.addEventListener("click", flipCard));
 
     shuffleCards();
-    previewCards(); 
+    previewCards();
   } catch (err) {
     console.error("Error fetching cards:", err);
     gameGrid.innerHTML = "<p>Failed to load cards. Check backend server.</p>";
@@ -184,5 +203,4 @@ async function fetchCards() {
 }
 
 // INITIALIZE GAME
-
 fetchCards();
