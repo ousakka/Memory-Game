@@ -3,26 +3,62 @@
 }
 
 h1 {
-  color: #fab95b;
+  color: #bc7717;
 }
 
 body {
   font-family: Arial, sans-serif;
   background-color: #f5f0cd;
+  background-image: url("https://i.pinimg.com/736x/12/66/5f/12665f6251688694959b349a1a669363.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   text-align: center;
   padding: 1.25rem;
 }
-.stats {
+/*.stats {
   display: flex;
   justify-content: center;
   gap: 2rem;
   font-weight: bold;
   margin-top: 1rem;
+} */
+/* Stats container */
+/* Cute container */
+.game-stats {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+/* Cute stat box */
+.stat-box {
+  background: #ffe4f2;
+  padding: 12px 22px;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ff4fa3;
+  box-shadow: 0 6px 12px rgba(255, 105, 180, 0.2);
+  transition: all 0.3s ease;
+}
+
+/* Hover bounce */
+.stat-box:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Numbers style */
+#timer,
+#moves {
+  font-size: 22px;
+  color: #ff1493;
 }
 
 .gameGrid {
   display: grid;
-  grid-template-columns: repeat(4, 7.5rem); /* 4 columns */
+  grid-template-columns: repeat(4, 7.5rem);
   gap: 1rem;
   justify-content: center;
   margin-top: 1.875rem;
@@ -58,7 +94,7 @@ body {
 }
 
 .cardFront {
-  background-color: #81bfda;
+  background-color: #4e8bc5;
 }
 
 .card.matched {
@@ -67,7 +103,6 @@ body {
   transition: opacity 0.5s;
 }
 
-/* Back: image */
 .cardBack {
   transform: rotateY(180deg);
 }
@@ -78,6 +113,11 @@ body {
 }
 .winMessage {
   text-align: center;
+}
+#rating {
+  font-size: 20px;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 .restartBtn {
