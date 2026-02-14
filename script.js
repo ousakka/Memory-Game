@@ -179,14 +179,14 @@ async function fetchCards() {
       cardDiv.classList.add("card");
       cardDiv.dataset.name = card.name;
 
-      cardDiv.innerHTML = `(
+      cardDiv.innerHTML = `
         <div class="cardInner">
           <div class="cardFront"></div>
           <div class="cardBack">
             <img src="${card.image_url}" alt="${card.name}" />
           </div>
         </div>
-      )`;
+      `;
 
       gameGrid.appendChild(cardDiv);
     });
