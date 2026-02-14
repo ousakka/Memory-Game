@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Connect to the database
-const dbFilePath = path.join(__dirname, "cards.sqlite3.s"); 
+const dbFilePath = path.join(__dirname, "cards.sqlite3"); 
 const db = knex({
   client: "sqlite3",
   connection: {
